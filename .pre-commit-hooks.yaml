@@ -5,3 +5,4 @@
   description: Checks commit message for Conventional Commits formatting
   always_run: true
   stages: [commit-msg]
+  verbose: true
