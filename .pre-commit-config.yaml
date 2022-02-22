@@ -3,6 +3,7 @@ repos:
     hooks:
       - id: conventional-pre-commit
         name: Conventional Commit (local)
-        entry: conventional-pre-commit.sh
-        language: script
+        entry: bash -c './conventional-pre-commit.sh "$@" || true' --
+        verbose: true
+        language: system
         stages: [commit-msg]

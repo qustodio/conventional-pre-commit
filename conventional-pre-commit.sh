@@ -34,10 +34,11 @@ if grep -Eq "$pattern" "$msg_file"; then
     exit 0
 fi
 
-echo "[Commit message] $( cat "$msg_file" )"
-echo "
-Your commit message does not follow Conventional Commits formatting
-https://www.conventionalcommits.org/
+printf "\e[48;5;226m---[WARNING] This is not a Conventional Commit---\e[0m\n"
+printf "\e[48;5;226m[Commit message] $( cat "$msg_file" )\e[0m\n"
+printf "
+\e[48;5;226mYour commit message does not follow Conventional Commits formatting\e[0m
+\e[48;5;226mhttps://www.conventionalcommits.org/\e[0m
 
 Conventional Commits start with one of the below types, followed by a colon,
 followed by the commit message:
@@ -55,5 +56,7 @@ Example commit message fixing an issue:
 Optionally, include a scope in parentheses after the type for more context:
 
     fix(account): remove infinite loop
+
+\e[48;5;226mThis WARNING will be soon an\e[0m \e[48;5;196m ERROR \e[0m
 "
 exit 1

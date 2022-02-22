@@ -7,12 +7,13 @@ result=0
 setup () {
     test_dir=$(mktemp -d)
 
-    cp "$this_dir/.pre-commit-config.yaml" "$test_dir/"
-    cp "$this_dir/conventional-pre-commit.sh" "$test_dir/"
-
     cd "$test_dir"
 
     git init
+    echo "$(touch README.md && git add . && git commit -m 'Initial Commit')" > /dev/null
+
+    cp "$this_dir/.pre-commit-config.yaml" "$test_dir/"
+    cp "$this_dir/conventional-pre-commit.sh" "$test_dir/"
 
     git branch -m main
     git config user.email "conventional-pre-commit@compiler.la"
@@ -47,7 +48,7 @@ pass="$(git commit -m 'test: conventional-pre-commit')"
 
 teardown
 
-echo "$pass" | grep -Eq "\[main \(root-commit\) [[:alnum:]]{7}\] test: conventional-pre-commit"
+echo "$pass" | grep -Pq "\[main ([a-z|\d]{7})\] test: conventional-pre-commit"
 
 (( result += "$?" ))
 
