@@ -34,6 +34,18 @@ if grep -Eq "$pattern" "$msg_file"; then
     exit 0
 fi
 
+# Check if commit is a merge commit and ignore it from conventional commits
+merge_start_str="Merged in "
+if grep -Eq "$merge_start_str" "$msg_file"; then
+    exit 0
+fi
+
+# Check if commit is a revert commit and ignore it from conventional commits
+revert_start_str="This reverts commit "
+if grep -Eq "$revert_start_str" "$msg_file"; then
+    exit 0
+fi
+
 printf "\e[48;5;226m---[WARNING] This is not a Conventional Commit---\e[0m\n"
 printf "\e[48;5;226m[Commit message] $( cat "$msg_file" )\e[0m\n"
 printf "
