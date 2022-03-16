@@ -4,6 +4,7 @@ A [`pre-commit`](https://pre-commit.com) hook to check commit messages for
 [Conventional Commits](https://conventionalcommits.org) formatting.
 
 Forked from https://github.com/compilerla/conventional-pre-commit
+
 ## Usage
 
 Make sure `pre-commit` is [installed](https://pre-commit.com#install).
