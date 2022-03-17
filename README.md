@@ -5,6 +5,10 @@ A [`pre-commit`](https://pre-commit.com) hook to check commit messages for
 
 Forked from https://github.com/compilerla/conventional-pre-commit
 
+- Warns the user instead of failing
+- Ignore default merge commit messages
+- Ignore default revert commit messages
+
 ## Usage
 
 Make sure `pre-commit` is [installed](https://pre-commit.com#install).
@@ -36,60 +40,17 @@ Install the `pre-commit` script:
 pre-commit install --hook-type commit-msg
 ```
 
-Make a (normal) commit :x::
-
-```console
-$ git commit -m "add a new feature"
-
-[INFO] Initializing environment for ....
-Conventional Commit......................................................Failed
-- hook id: conventional-pre-commit
-- duration: 0.07s
-- exit code: 1
-
-[Commit message] add a new feature
-
-Your commit message does not follow Conventional Commits formatting
-https://www.conventionalcommits.org/
-
-Conventional Commits start with one of the below types, followed by a colon,
-followed by the commit message:
-
-    build chore ci docs feat fix perf refactor revert style test
-
-Example commit message adding a feature:
-
-    feat: implement new API
-
-Example commit message fixing an issue:
-
-    fix: remove infinite loop
-
-Optionally, include a scope in parentheses after the type for more context:
-
-    fix(account): remove infinite loop
-```
-
-Make a (conventional) commit :heavy_check_mark::
-
-```console
-$ git commit -m "feat: add a new feature"
-
-[INFO] Initializing environment for ....
-Conventional Commit......................................................Passed
-- hook id: conventional-pre-commit
-- duration: 0.05s
-```
-
-## Actual tag: v1.2.0-Qustodio
+## Actual qustodio version: v1.2.0-Qustodio
 
 This tag differs from the orginal repo v1.2.0 in the following points
 - Warns about a non-conventional commit beeing made instead of failing
 - Ignores commit messages if they start with "Merged in " or "This reverts commit " in order to ignore merges or reverts
 
-## Versioning
+## Developing for this repo
 
-Versioning generally follows [Semantic Versioning](https://semver.org/).
+There are two main files to modify:
+- conventional-pre-commit.sh is the script that is executed in order to validate a commit message, it receives a commit message file as input and an array of arguments that specify the commit types to use.
+- tests.sh is the script that test this repo.
 
 ## License
 
