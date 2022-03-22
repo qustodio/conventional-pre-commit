@@ -69,7 +69,7 @@ Optionally, include a scope in parentheses after the type for more context:
 
     fix(account): remove infinite loop
 
-\e[48;5;226m\033[1;30mThis WARNING will be soon an\e[0m \e[48;5;196mERROR \e[0m
+\e[48;5;226m\033[1;30mThis WARNING will be soon an\e[0m\e[48;5;196m ERROR \e[0m
 \e[48;5;226m\033[1;30mFind out why in: https://qustodio.atlassian.net/l/c/SH32AUW0\e[0m
 "
 exit 0      # 0 as this is only a warning
