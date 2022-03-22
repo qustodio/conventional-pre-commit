@@ -46,11 +46,11 @@ if grep -Eq "$revert_start_str" "$msg_file"; then
     exit 0
 fi
 
-printf "\e[48;5;226m---[WARNING] This is not a Conventional Commit---\e[0m\n"
-printf "\e[48;5;226m[Commit message] $( cat "$msg_file" )\e[0m\n"
+printf "\e[48;5;226m\033[1;30m---[WARNING] This is not a Conventional Commit---\e[0m\n"
+printf "\e[48;5;226m\033[1;30m[Commit message] $( cat "$msg_file" )\e[0m\n"
 printf "
-\e[48;5;226mYour commit message does not follow Conventional Commits formatting\e[0m
-\e[48;5;226mhttps://www.conventionalcommits.org/\e[0m
+\e[48;5;226m\033[1;30mYour commit message does not follow Conventional Commits formatting\e[0m
+\e[48;5;226m\033[1;30mhttps://www.conventionalcommits.org/\e[0m
 
 Conventional Commits start with one of the below types, followed by a colon,
 followed by the commit message:
@@ -69,7 +69,7 @@ Optionally, include a scope in parentheses after the type for more context:
 
     fix(account): remove infinite loop
 
-\e[48;5;226mThis WARNING will be soon an\e[0m \e[48;5;196m ERROR \e[0m
-\e[48;5;226mFind out why in: https://qustodio.atlassian.net/l/c/SH32AUW0\e[0m
+\e[48;5;226m\033[1;30mThis WARNING will be soon an\e[0m \e[48;5;196mERROR \e[0m
+\e[48;5;226m\033[1;30mFind out why in: https://qustodio.atlassian.net/l/c/SH32AUW0\e[0m
 "
 exit 0      # 0 as this is only a warning
