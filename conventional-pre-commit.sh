@@ -46,6 +46,12 @@ if grep -Eq "$revert_start_str" "$msg_file"; then
     exit 0
 fi
 
+# Check if commit is a revert commit and ignore it from conventional commits
+bump_v_start_str="Bump version to "
+if grep -Eq "$bump_v_start_str" "$msg_file"; then
+    exit 0
+fi
+
 printf "\e[48;5;226m\033[1;30m---[WARNING] This is not a Conventional Commit---\e[0m\n"
 printf "\e[48;5;226m\033[1;30m[Commit message] $( cat "$msg_file" )\e[0m\n"
 printf "

@@ -28,13 +28,16 @@ teardown () {
     rm -rf "$test_dir"
 }
 
-# test a failure
+# test a failure as warning
 
 setup
 
 fail="$(git commit -m 'bad: conventional-pre-commit' 2>&1 > /dev/null)"
 
 teardown
+
+echo "$fail" | grep -q "Conventional Commit (local)..............................................Passed"
+(( result += "$?" ))
 
 echo "$fail" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
 (( result += "$?" ))
@@ -43,11 +46,11 @@ echo "$fail" | grep -Eq "Your commit message does not follow Conventional Commit
 
 setup
 
-pass="$(git commit -m 'test: conventional-pre-commit')"
+pass="$(git commit -m 'test: conventional-pre-commit' 2>&1 > /dev/null)"
 
 teardown
 
-echo "$pass" | grep -Pq "\[main ([a-z|\d]{7})\] test: conventional-pre-commit"
+echo "$pass" | grep -q "Conventional Commit (local)..............................................Passed"
 (( result += "$?" ))
 
 ! echo "$pass" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
@@ -58,11 +61,11 @@ echo "$pass" | grep -Pq "\[main ([a-z|\d]{7})\] test: conventional-pre-commit"
 
 setup
 
-merge="$(git commit -m 'Merged in bug/something (pull request #something)')"
+merge="$(git commit -m 'Merged in bug/something (pull request #something)' 2>&1 > /dev/null)"
 
 teardown
 
-echo "$merge" | grep -Pq "\[main ([a-z|\d]{7})\] Merged in bug\/something \(pull request #something\)"
+echo "$merge" | grep -q "Conventional Commit (local)..............................................Passed"
 (( result += "$?" ))
 
 ! echo "$merge" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
@@ -73,14 +76,29 @@ echo "$merge" | grep -Pq "\[main ([a-z|\d]{7})\] Merged in bug\/something \(pull
 
 setup
 
-revert="$(git commit -m 'This reverts commit something.')"
+revert="$(git commit -m 'This reverts commit something.' 2>&1 > /dev/null)"
 
 teardown
 
-echo "$revert" | grep -Pq "\[main ([a-z|\d]{7})\] This reverts commit something."
+echo "$revert" | grep -q "Conventional Commit (local)..............................................Passed"
 (( result += "$?" ))
 
 ! echo "$revert" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
+(( result += "$?" ))
+
+
+# test a bump version commit
+
+setup
+
+bump="$(git commit -m 'Bump version to BCK-180.250.0' 2>&1 > /dev/null)"
+
+teardown
+
+echo "$bump" | grep -q "Conventional Commit (local)..............................................Passed"
+(( result += "$?" ))
+
+! echo "$bump" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
 (( result += "$?" ))
 
 exit "$result"
