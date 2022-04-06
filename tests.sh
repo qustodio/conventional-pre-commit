@@ -73,7 +73,7 @@ echo "$merge" | grep -q "Conventional Commit (local)............................
 
 setup
 
-merge_in="$(git commit -m 'Merged branch bug/something' 2>&1 > /dev/null)"
+merge_in="$(git commit -m 'Merge branch bug/something' 2>&1 > /dev/null)"
 
 teardown
 

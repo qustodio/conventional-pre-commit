@@ -40,7 +40,7 @@ if grep -Eq "$merge_start_str" "$msg_file"; then
     exit 0
 fi
 
-merge_start_str="Merged branch "
+merge_start_str="Merge branch "
 if grep -Eq "$merge_start_str" "$msg_file"; then
     exit 0
 fi

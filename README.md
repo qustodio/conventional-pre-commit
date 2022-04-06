@@ -8,6 +8,7 @@ Forked from https://github.com/compilerla/conventional-pre-commit
 - Warns the user instead of failing
 - Ignore default merge commit messages
 - Ignore default revert commit messages
+- Ignore default git flow Bump version messages
 
 ## Usage
 
