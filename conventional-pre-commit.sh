@@ -40,6 +40,11 @@ if grep -Eq "$merge_start_str" "$msg_file"; then
     exit 0
 fi
 
+merge_start_str="Merged branch "
+if grep -Eq "$merge_start_str" "$msg_file"; then
+    exit 0
+fi
+
 # Check if commit is a revert commit and ignore it from conventional commits
 revert_start_str="This reverts commit "
 if grep -Eq "$revert_start_str" "$msg_file"; then

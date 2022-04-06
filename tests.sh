@@ -71,6 +71,18 @@ echo "$merge" | grep -q "Conventional Commit (local)............................
 ! echo "$merge" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
 (( result += "$?" ))
 
+setup
+
+merge_in="$(git commit -m 'Merged branch bug/something' 2>&1 > /dev/null)"
+
+teardown
+
+echo "$merge_in" | grep -q "Conventional Commit (local)..............................................Passed"
+(( result += "$?" ))
+
+! echo "$merge_in" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
+(( result += "$?" ))
+
 
 # test a revert commit
 
