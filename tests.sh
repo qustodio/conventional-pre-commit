@@ -56,6 +56,19 @@ echo "$pass" | grep -q "Conventional Commit (local).............................
 ! echo "$pass" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
 (( result += "$?" ))
 
+setup
+
+pass="$(git commit -m 'test(scope.scope): conventional-pre-commit' 2>&1 > /dev/null)"
+
+teardown
+
+echo "$pass" | grep -q "Conventional Commit (local)..............................................Passed"
+(( result += "$?" ))
+
+! echo "$pass" | grep -Eq "Your commit message does not follow Conventional Commits formatting"
+(( result += "$?" ))
+
+
 
 # test a merge commit
 
